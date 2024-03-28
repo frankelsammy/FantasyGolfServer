@@ -19,7 +19,12 @@ const client = new MongoClient(uri, {
 });
 
 app.get('/', (req, res) => {
-  res.render("index")
+  makeTable().then((result) => {
+    res.render("index", { result })
+  }).catch((error) => {
+    console.error('Error in processResultsAndReturnString:', error);
+  });
+  
 })
 
 app.listen(port, () => {
@@ -33,17 +38,78 @@ async function retrieveResults() {
 
     const database = client.db('FantasyGolf');
     const collection = database.collection('League');
-    const documents = await collection.find({ /* your query criteria */ }).toArray();
+    const results = await collection.find({ /* your query criteria */ }).toArray();
 
     // Process the retrieved documents
-    console.log('Retrieved Documents:', documents);
     const outputFileName = 'output.json';
-    fs.writeFileSync(outputFileName, JSON.stringify(documents, null, 2));
-
+    fs.writeFileSync(outputFileName, JSON.stringify(results, null, 2));
+    return results
 
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
   }
 }
-//retrieveResults().catch(console.dir);
+
+async function makeTable(results) {
+  try {
+    const res = await retrieveResults()
+    let table = "<table border='1'>"
+    table += `
+      <thead>
+      <tr>
+          <th>Name</th>
+          <th>Player 1</th>
+          <th>PTS</th>
+          <th>Player 2</th>
+          <th>PTS</th>
+          <th>Player 3</th>
+          <th>PTS</th>
+          <th>Player 4</th>
+          <th>PTS</th>
+          <th>Player 5</th>
+          <th>PTS</th>
+          <th>Player 6</th>
+          <th>PTS</th>
+          <th>Player 7</th>
+          <th>PTS</th>
+          <th>Player 8</th>
+          <th>PTS</th>
+          <th>Total points</th>
+      </tr>
+  </thead>
+  <tbody>
+  `;
+  const teams = res[0]["Teams"]
+  teams.forEach(team => {
+    table += `
+    <tr>
+    <td>
+    `
+    table += team["Name"]
+    table += `
+    </td>
+    `
+    const roster = team["Roster"]
+    roster.forEach(player => {
+      table += "<td>"
+      table += player["Name"]
+      table += "</td>"
+      table += `<td>${player["Points scored"]}</td>`
+
+    })
+    table += `<td>${team["Total Score"]}</td></tr>`
+
+    
+  });
+
+    
+    table += "</table>"
+    return table
+  } catch (error) {
+    // Handle any errors that occur during the retrieval or processing process
+    console.error('Error:', error);
+    return 'Error occurred while processing results';
+  }
+
+}
