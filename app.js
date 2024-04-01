@@ -1,13 +1,17 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000;
+if (port == 3000) {
+  require('dotenv').config();
+}
 const path = require('path');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const fs = require('fs');
-require('dotenv').config();
 const uri = process.env.MONGODB_URI;
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
+app.use('/static', express.static('static'))
+
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
