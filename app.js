@@ -6,7 +6,6 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const fs = require('fs');
 require('dotenv').config();
 const uri = process.env.MONGODB_URI;
-console.log(uri)
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -56,6 +55,9 @@ async function makeTable(results) {
     const res = await retrieveResults()
     let table = "<table border='1'>"
     table += `
+      <caption>
+      Teams highlighted yellow indicate everyone on the team made the cut (15 bonus points)
+      </caption>
       <thead>
       <tr>
           <th>Name</th>
@@ -82,17 +84,24 @@ async function makeTable(results) {
   `;
   const teams = res[0]["Teams"]
   teams.forEach(team => {
-    table += `
-    <tr>
-    <td>
-    `
+    if (team["AllCut"] == true) {
+      table += `
+      <tr class="allCut">
+      <td>
+      `
+    } else {
+      table += `
+      <tr>
+      <td>
+      `
+    }
     table += team["Name"]
     table += `
     </td>
     `
     const roster = team["Roster"]
     roster.forEach(player => {
-      table += "<td>"
+      table += `<td class="Name">`
       table += player["Name"]
       table += "</td>"
       table += `<td>${player["Points scored"]}</td>`
