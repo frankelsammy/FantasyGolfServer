@@ -1,18 +1,26 @@
 <style>
-	h1 {
-		text-align: center;
-		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-		color: darkgreen;
-
-	}
-
+h1 {
+    color: darkgreen; /* Text color */
+    font-family: Arial, sans-serif; /* Font family */
+    font-size: 2.5em; /* Font size */
+    font-weight: bold; /* Font weight */
+    text-align: center; /* Text alignment */
+    margin-top: 20px; /* Top margin */
+    margin-bottom: 20px; /* Bottom margin */
+}
 	body {
-		background-color: #b5fcb7;
-	}
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #aae3f0;
+}
 
 	table {
 		border-collapse: collapse;
-		width: 100%;
+		max-width: 960px;
+    margin: 0 auto; /* Center the table within its container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px; /* Add margin at the bottom of the table */
 	}
 
 	td,
@@ -21,11 +29,23 @@
 		/* Add borders */
 		padding: 8px;
 		/* Add padding */
+		text-align: center;
 	}
-
+	
+	th {
+    background-color: gray; /* Background color */
+    color: white; /* Text color */
+    font-weight: bold; /* Font weight */
+	text-align: center;
+}
 	tr:hover {
 		background-color: #e1e1e1;
 	}
+
+	.Name {
+		font-weight: bold;
+	}
+
 
 	caption {
 		font-weight: bold;
@@ -33,7 +53,7 @@
 		margin-bottom: 10px;
 	}
 
-	.allCut td {
+	.allCut {
 		background-color: yellow;
 	}
 </style>
