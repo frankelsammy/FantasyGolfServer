@@ -56,10 +56,11 @@ async function makeTable(results) {
     let table = "<table border='1'>"
     table += `
       <caption>
-      Teams highlighted yellow indicate everyone on the team made the cut (15 bonus points)
+      *Teams highlighted yellow indicate everyone on the team made the cut (15 bonus points)
       </caption>
       <thead>
       <tr>
+          <th>Place</th>
           <th>Name</th>
           <th>Player 1</th>
           <th>PTS</th>
@@ -95,13 +96,14 @@ async function makeTable(results) {
       <td>
       `
     }
+    table += `${team["Place"]}</td><td class="Name">`
     table += team["Name"]
     table += `
     </td>
     `
     const roster = team["Roster"]
     roster.forEach(player => {
-      table += `<td class="Name">`
+      table += `<td>`
       table += player["Name"]
       table += "</td>"
       table += `<td>${player["Points scored"]}</td>`
