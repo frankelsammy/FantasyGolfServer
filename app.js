@@ -67,6 +67,7 @@ async function makeTable(results) {
     table += `
       <caption>
       *Teams highlighted yellow indicate everyone on the team made the cut (15 bonus points)
+      <br>Teams with ${res[0]["worstTop25"]} get 15 bonus points (lowest ranked chosen player in top 25)
       </caption>
       <thead>
       <tr>
@@ -88,7 +89,7 @@ async function makeTable(results) {
           <th>PTS</th>
           <th>Player 8</th>
           <th>PTS</th>
-          <th>Total points</th>
+          <th>Total Team Points</th>
       </tr>
   </thead>
   <tbody>
