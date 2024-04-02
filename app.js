@@ -62,7 +62,7 @@ async function makeTable(results) {
   try {
     const res = await retrieveResults()
     date = res[0]["Date"];
-    console.log(date)
+
     let table = "<table border='1'>"
     table += `
       <caption>
@@ -113,8 +113,9 @@ async function makeTable(results) {
     `
       const roster = team["Roster"]
       roster.forEach(player => {
+        let finish = player["Finish"] === 1000 ? "DNF" : player["Finish"];
         table += `<td>`
-        table += player["Name"]
+        table += `${player["Name"]} (${finish})`
         table += "</td>"
         table += `<td>${player["Points scored"]}</td>`
 
