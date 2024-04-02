@@ -114,6 +114,9 @@ async function makeTable(results) {
       const roster = team["Roster"]
       roster.forEach(player => {
         let finish = player["Finish"] === 1000 ? "DNF" : player["Finish"];
+        if (player["Cut"]) {
+          finish = "CUT"
+        }
         table += `<td>`
         table += `${player["Name"]} (${finish})`
         table += "</td>"
