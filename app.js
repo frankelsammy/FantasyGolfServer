@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000;
-if (port == 3000) {
+
+
+if (port == 3000) /* local build */ {
   require('dotenv').config();
 }
 const path = require('path');
@@ -11,6 +13,8 @@ const uri = process.env.MONGODB_URI;
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 app.use('/static', express.static('static'))
+
+let date = getDate();
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -23,11 +27,11 @@ const client = new MongoClient(uri, {
 
 app.get('/', (req, res) => {
   makeTable().then((result) => {
-    res.render("index", { result })
+    res.render("index", { date, result })
   }).catch((error) => {
     console.error('Error in processResultsAndReturnString:', error);
   });
-  
+
 })
 
 app.listen(port, () => {
@@ -57,6 +61,8 @@ async function retrieveResults() {
 async function makeTable(results) {
   try {
     const res = await retrieveResults()
+    date = res[0]["Date"];
+    console.log(date)
     let table = "<table border='1'>"
     table += `
       <caption>
@@ -87,38 +93,38 @@ async function makeTable(results) {
   </thead>
   <tbody>
   `;
-  const teams = res[0]["Teams"]
-  teams.forEach(team => {
-    if (team["AllCut"] == true) {
-      table += `
+    const teams = res[0]["Teams"]
+    teams.forEach(team => {
+      if (team["AllCut"] == true) {
+        table += `
       <tr class="allCut">
       <td>
       `
-    } else {
-      table += `
+      } else {
+        table += `
       <tr>
       <td>
       `
-    }
-    table += `${team["Place"]}</td><td class="Name">`
-    table += team["Name"]
-    table += `
+      }
+      table += `${team["Place"]}</td><td class="Name">`
+      table += team["Name"]
+      table += `
     </td>
     `
-    const roster = team["Roster"]
-    roster.forEach(player => {
-      table += `<td>`
-      table += player["Name"]
-      table += "</td>"
-      table += `<td>${player["Points scored"]}</td>`
+      const roster = team["Roster"]
+      roster.forEach(player => {
+        table += `<td>`
+        table += player["Name"]
+        table += "</td>"
+        table += `<td>${player["Points scored"]}</td>`
 
-    })
-    table += `<td>${team["Total Score"]}</td></tr>`
+      })
+      table += `<td>${team["Total Score"]}</td></tr>`
 
-    
-  });
 
-    
+    });
+
+
     table += "</table>"
     return table
   } catch (error) {
@@ -127,4 +133,23 @@ async function makeTable(results) {
     return 'Error occurred while processing results';
   }
 
+}
+function getDate() {
+  // Create a new Date object
+  const currentDate = new Date();
+
+  // Define options for date and time formatting
+  const options = {
+    weekday: 'long', // Display the full name of the weekday
+    month: 'long', // Display the full name of the month
+    day: 'numeric', // Display the day of the month
+    hour: 'numeric', // Display the hour (12-hour format)
+    minute: 'numeric', // Display the minute
+    hour12: true // Use 12-hour format (true) or 24-hour format (false)
+  };
+
+  // Format the date and time using Intl.DateTimeFormat
+  const formatter = new Intl.DateTimeFormat('en-US', options);
+  const formattedDateTime = formatter.format(currentDate);
+  return formattedDateTime
 }

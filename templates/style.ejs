@@ -1,26 +1,58 @@
 <style>
-h1 {
-    color: darkgreen; /* Text color */
-    font-family: Arial, sans-serif; /* Font family */
-    font-size: 2.5em; /* Font size */
-    font-weight: bold; /* Font weight */
-    text-align: center; /* Text alignment */
-    margin-top: 20px; /* Top margin */
-    margin-bottom: 20px; /* Bottom margin */
-}
+	h1 {
+		color: darkgreen;
+		/* Text color */
+		font-family: Arial, sans-serif;
+		/* Font family */
+		font-size: 2.5em;
+		/* Font size */
+		font-weight: bold;
+		/* Font weight */
+		text-align: center;
+		/* Text alignment */
+		margin-top: 20px;
+		/* Top margin */
+		margin-bottom: 20px;
+		/* Bottom margin */
+	}
+
+	.container {
+		position: relative;
+		/* Required for absolute positioning */
+		width: 100%;
+		height: 100vh;
+		/* Adjust as needed */
+	}
+
+	.top-right-text {
+		position: absolute;
+		top: 10px;
+		/* Adjust as needed */
+		right: 10px;
+		/* Adjust as needed */
+		color: #333;
+		/* Optional: Change text color */
+		font-size: 16px;
+		/* Optional: Change font size */
+		font-family: Arial, sans-serif;
+		/* Optional: Change font family */
+	}
+
 	body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #aae3f0;
-}
+		font-family: Arial, sans-serif;
+		margin: 0;
+		padding: 0;
+		background-color: #aae3f0;
+	}
 
 	table {
 		border-collapse: collapse;
 		max-width: 960px;
-    margin: 0 auto; /* Center the table within its container */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	margin-bottom: 20px; /* Add margin at the bottom of the table */
+		margin: 0 auto;
+		/* Center the table within its container */
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		margin-bottom: 20px;
+		/* Add margin at the bottom of the table */
 	}
 
 	td,
@@ -31,13 +63,17 @@ h1 {
 		/* Add padding */
 		text-align: center;
 	}
-	
+
 	th {
-    background-color: gray; /* Background color */
-    color: white; /* Text color */
-    font-weight: bold; /* Font weight */
-	text-align: center;
-}
+		background-color: gray;
+		/* Background color */
+		color: white;
+		/* Text color */
+		font-weight: bold;
+		/* Font weight */
+		text-align: center;
+	}
+
 	tr:hover {
 		background-color: #e1e1e1;
 	}
