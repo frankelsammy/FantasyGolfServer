@@ -36,6 +36,13 @@ app.get('/', (req, res) => {
 
 })
 
+app.get('/rules', (req,res) => {
+  res.render("rules")
+})
+app.get('/overall', (req,res) => {
+  res.render("overall")
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

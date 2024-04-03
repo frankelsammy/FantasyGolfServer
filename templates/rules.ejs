@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules</title>
+    <%- include('./style'); %>
+</head>
+<body>
+    <div class="tab">
+        <a href="/" class="tablinks">HOME</a>
+        <a href="/overall" class="tablinks">OVERALL LEADERBOARD</a>
+    </div>
+    <header>
+        <h1>2024 Scoring System</h1>
+    </header>
+    <section id="rules">
+        <ol>
+            <li>Your 1st pick counts 1.5 times if that player is ranked 1-5; otherwise, it is worth 2 times.</li>
+            <li>Your 2nd pick counts 1.5 times regardless of ranking.</li>
+            <li>4 points for making the cut (except as noted below); 3 points for top 25; 4 points for top 15; 10th place gets an additional point, 9th place gets 2 addl points etc with the winner getting 10 points for 1st place plus an additional 15 points.</li>
+            <li>If you pick someone in the top 5, they do not receive points for making the cut (but they receive all other points).</li>
+            <li>If you pick someone outside the top 10 and they make the top 25, you get an extra 5 points and if you pick someone outside the top 20 and they make the top 25 you get an additional 9 points.</li>
+            <li>If any team has all 8 players make the cut, you get a bonus 15 points (this includes top 5 players).</li>
+            <li>An extra 15 points goes to the worst ranked player picked that makes it to the top 25.</li>
+        </ol>
+    </section>
+</body>
+</html>
