@@ -2,10 +2,12 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000;
 
-
 if (port == 3000) /* local build */ {
   require('dotenv').config();
 }
+const NodeCache = require('node-cache');
+const cache = new NodeCache({ stdTTL: 120 }); // Cache with a TTL of 2 minutes (120 seconds)
+
 const path = require('path');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const fs = require('fs');
@@ -34,6 +36,13 @@ app.get('/', (req, res) => {
 
 })
 
+app.get('/rules', (req,res) => {
+  res.render("rules")
+})
+app.get('/overall', (req,res) => {
+  res.render("overall")
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
@@ -60,7 +69,17 @@ async function retrieveResults() {
 
 async function makeTable(results) {
   try {
-    const res = await retrieveResults()
+    let res;
+    const cachedData = cache.get('database');
+    if (cachedData) { //Check if the database is still in the cache
+      res = cachedData
+      console.log("using cached data")
+    } else {
+      res = await retrieveResults()
+      console.log("retrieving from db")
+      cache.set("database", res)
+    }
+
     date = res[0]["Date"];
 
     let table = "<table border='1'>"
@@ -153,7 +172,6 @@ function getDate() {
     hour12: true // Use 12-hour format (true) or 24-hour format (false)
   };
 
-  // Format the date and time using Intl.DateTimeFormat
   const formatter = new Intl.DateTimeFormat('en-US', options);
   const formattedDateTime = formatter.format(currentDate);
   return formattedDateTime
