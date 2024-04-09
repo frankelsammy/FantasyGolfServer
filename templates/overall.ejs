@@ -6,26 +6,13 @@
     <title>2024 Leaderboard</title>
 	<link rel="icon" href="/static/golf.png" type="image/png">
 	<%- include('./style'); %>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            font-size: 18px;
-            color: #666;
-        }
-    </style>
 </head>
 <body>
-	<a href="/" class="tablinks">HOME</a>
-	<a href="/rules" class="tablinks">RULES</a>
-	<a href="http://www.owgr.com/ranking" class="tablinks">RANKINGS</a>
+	<div class="tab">
+        <a href="/" class="tablinks">HOME</a>
+		<a href="/rules" class="tablinks">RULES</a>
+    </div>
     <h1>Check back after the tournament</h1>
-    <p>To see the overall 2024 leaderboard.</p>
+    <p class="leaderboard">To see the overall 2024 leaderboard.</p>
 </body>
 </html>
