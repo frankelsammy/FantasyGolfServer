@@ -11,7 +11,7 @@
 <body>
 	<div class="tab">
         <a href="/overall" class="tablinks">OVERALL LEADERBOARD</a>
-		<a href="/rules" class="tablinks">RULES</a>
+		<a href="/rules" class="tablinks">SCORING</a>
     </div>
 	<div class="top-right-text">
 		<p>Last updated: <%= date %>
@@ -21,5 +21,14 @@
 	<h1>Masters 2024</h1>
 	<%- result %>
 </body>
+<script>
+	// Function to reload the page
+	function reloadPage() {
+		location.reload();
+	}
+
+	// Set a timer to reload the page after 5 minutes (300,000 milliseconds)
+	setTimeout(reloadPage, 150000);
+</script>
 
 </html>
