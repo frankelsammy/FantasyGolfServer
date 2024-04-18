@@ -36,11 +36,19 @@ app.get('/', (req, res) => {
 
 })
 
-app.get('/rules', (req,res) => {
+app.get('/rules', (req, res) => {
   res.render("rules")
 })
-app.get('/overall', (req,res) => {
-  res.render("overall")
+app.get('/overall', (req, res) => {
+  getOverallLeaderboard((err, table) => {
+    if (err) {
+      console.error('Error:', err);
+      return;
+    }
+    res.render("overall", { table })
+  });
+  
+
 })
 app.get('/admin', (req, res) => {
   res.render("admin")
@@ -178,4 +186,29 @@ function getDate() {
   const formatter = new Intl.DateTimeFormat('en-US', options);
   const formattedDateTime = formatter.format(currentDate);
   return formattedDateTime
+}
+
+function getOverallLeaderboard(callback) {
+  const fs = require('fs')
+  const csv = require('csv-parser')
+
+  const results = [];
+
+  fs.createReadStream('static/OverallLeaderboard.csv')
+    .pipe(csv())
+    .on('data', (data) => {
+      results.push(data);
+    })
+    .on('end', () => {
+      let table = `<table id="overall" border='1'>`
+      table += "<tr><th>Place</th><th>Name</th><th>Masters Score</th><th>PGA Champ Score</th><th>US Open Score</th><th>Open Champ Score</th><th>Total Score</th>"
+      let place = 0
+      results.forEach((row, index) => {
+        place += 1
+        table += `<tr><td>${place}</td><td>${row["Name"]}</td><td>${row["Masters"]}</td><td>${row["PGA Champs"]}</td><td>${row["US Open"]}</td><td>${row["British Open"]}</td><td>${row["Total"]}</td></tr>`
+      });
+      table += "</table>"
+      callback(null, table)
+    });
+
 }
