@@ -110,7 +110,9 @@ const client = new MongoClient(uri, {
 			finish = "CUT"
 		  }
 		  table += `<td>`
-		  table += `${player["Name"]} (${finish})`
+		  full_name = player["Name"].split(" ")
+		  last_name = full_name[full_name.length - 1]
+		  table += `${last_name} (${finish})`
 		  table += "</td>"
 		  table += `<td>${player["Points scored"]}</td>`
   
