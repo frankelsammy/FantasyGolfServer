@@ -106,8 +106,8 @@ const client = new MongoClient(uri, {
 	  `
 		const roster = team["Roster"]
 		roster.forEach(player => {
-		  let finish = player["Finish"] === 1000 ? "DNF" : player["Finish"];
-		  if (player["Cut"]) {
+		  let finish = player["Finish"] === 1000 ? "N/A" : player["Finish"];
+		  if (player["Cut"] && finish != "N/A") {
 			finish = "CUT"
 		  }
 		  table += `<td>`
