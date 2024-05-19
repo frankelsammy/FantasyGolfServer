@@ -58,7 +58,6 @@ const client = new MongoClient(uri, {
 	  table += `
 		<caption>
 		Teams highlighted yellow indicate everyone on the team made the cut (15 bonus points)
-		<br>*Using an estimated cutline of 70th place until official cut is made
 		<br>Teams with ${res[0]["worstTop25"]} get 15 bonus points (lowest ranked chosen player in top 25)
 		</caption>
 		<thead>
