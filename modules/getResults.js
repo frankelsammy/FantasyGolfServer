@@ -114,7 +114,13 @@ const client = new MongoClient(uri, {
 		  last_name = full_name[full_name.length - 1]
 		  table += `${last_name} (${finish})`
 		  table += "</td>"
-		  table += `<td>${player["Points scored"]}</td>`
+		  points = player["Points scored"]
+		  
+		  if (player["Name"] == res[0]["worstTop25"]) {
+			points += 15
+		  }
+
+		  table += `<td>${points}</td>`
   
 		})
 		table += `<td>${team["Total Score"]}</td></tr>`
