@@ -39,6 +39,12 @@ app.get('/admin', (req, res) => {
   res.render("admin")
 })
 
+app.get('/counter', (req, res) => {
+  res.render("counter")
+})
+
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
