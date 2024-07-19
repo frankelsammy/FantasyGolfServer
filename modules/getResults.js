@@ -104,9 +104,11 @@ const client = new MongoClient(uri, {
 	  </td>
 	  `
 		const roster = team["Roster"]
+		const date = new Date()
+		const today = date.getDay()
 		roster.forEach(player => {
 		  let finish = player["Finish"] === 1000 ? "N/A" : player["Finish"];
-		  if (player["Cut"] && finish != "N/A") {
+		  if ((today == 6 || today == 7) && player["Cut"] && finish != "N/A") {
 			finish = "CUT"
 		  }
 		  table += `<td>`
