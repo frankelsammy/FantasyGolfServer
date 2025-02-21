@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2024 Leaderboard</title>
-	<link rel="icon" href="/static/golf.png" type="image/png">
-	<%- include('./style'); %>
+    <link rel="icon" href="/static/golf.png" type="image/png">
+    <%- include('./style'); %>
 </head>
+
 <body>
-	<div class="tab">
-        <a href="/" class="tablinks">HOME</a>
-		<a href="/rules" class="tablinks">SCORING</a>
+    <div class="tab-container">
+        <div class="tab">
+            <a href="/" class="tablinks">HOME</a>
+            <a href="/rules" class="tablinks">SCORING</a>
+        </div>
     </div>
     <h1>2024 Overall Results</h1>
     <%- table %>
 </body>
+
 </html>
