@@ -10,15 +10,43 @@
 		/* Font weight */
 		text-align: center;
 		/* Text alignment */
-		margin-top: 20px;
+		/margin-top: 20px;
 		/* Top margin */
 		margin-bottom: 20px;
 		/* Bottom margin */
 	}
-	
+
 	#overall {
 		font-size: larger;
 	}
+
+/* Gray box touching the top */
+.tab-container {
+    width: 100%; /* Full width */
+    padding: 10px 0; /* Space above and below the tabs */
+    border-bottom: 2px solid #0056b3; /* Line separating the tabs from the rest of the page */
+}
+
+/* Aligns the tab div to the left */
+.tab {
+    display: flex;
+    gap: 10px; /* Space between tabs */
+    margin-left: 20px; /* Move tabs away from the left edge */
+}
+
+/* Tab styling */
+.tab a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: darkblue;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.tab a:hover {
+    background-color: #0056b3;
+}
 
 	.container {
 		position: relative;
@@ -48,26 +76,34 @@
 		padding: 0;
 		background-color: whitesmoke;
 	}
+	.pageTitle {
+		background-image: linear-gradient(blue, white);
+
+	}
 
 	table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 0 auto;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    margin-left: 2px;
-    margin-right: 2px;
-    height: auto; /* Set table height to auto */
-}
+		border-collapse: collapse;
+		width: 100%;
+		margin: 0 auto;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		margin-bottom: 20px;
+		margin-left: 2px;
+		margin-right: 2px;
+		height: auto;
+		/* Set table height to auto */
+	}
 
-td, th {
-    border: 1px solid darkblue;
-    padding: 8px;
-    text-align: center;
-    color: darkblue;
-    overflow: hidden; /* Prevent content overflow */
-	font-size: smaller;
-}
+	td,
+	th {
+		border: 1px solid darkblue;
+		padding: 8px;
+		text-align: center;
+		color: darkblue;
+		overflow: hidden;
+		/* Prevent content overflow */
+		font-size: smaller;
+	}
+
 	th {
 		background-color: darkblue;
 		/* Background color */
@@ -108,26 +144,6 @@ td, th {
 		font-weight: bold;
 	}
 
-	.tab {
-		display: flex;
-		justify-content: flex-start;
-		margin-bottom: 20px;
-		margin-top: 5px; /* Add margin to the top */
-	}
-
-	.tab a {
-		text-decoration: none;
-		padding: 10px 20px;
-		margin: 0 5px;
-		background-color: darkblue;
-		color: #fff;
-		border-radius: 5px;
-		transition: background-color 0.3s ease;
-	}
-
-	.tab a:hover {
-		background-color: #0056b3;
-	}
 
 	.tabcontent {
 		display: none;
@@ -145,6 +161,7 @@ td, th {
 		text-align: center;
 		font-size: large;
 	}
+
 	#rules {
 		color: darkblue;
 		font-size: larger;
