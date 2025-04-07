@@ -3,7 +3,6 @@ const app = express()
 const port = process.env.PORT || 3000;
 const path = require('path');
 
-
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 app.use('/static', express.static('static'))
