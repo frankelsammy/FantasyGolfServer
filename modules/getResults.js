@@ -59,6 +59,7 @@ async function makeTable(results) {
 		<caption>
 		Teams highlighted yellow indicate everyone on the team made the cut (15 bonus points)
 		<br>Teams with ${res[0]["worstTop25"]} get 15 bonus points (lowest ranked chosen player in top 25)
+		<br> Using a projected Cut Line of 50th Place
 		</caption>
 		<thead>
 		<tr>
