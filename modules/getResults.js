@@ -53,13 +53,18 @@ async function makeTable(results) {
 		}
 
 		results[0] = res[0]["Date"];
+		const currentRound = res[0]["CURRENT_ROUND"]
 
 		let table = "<table border='1'>"
 		table += `
 		<caption>
 		Teams highlighted yellow indicate everyone on the team made the cut (15 bonus points)
-		<br>Teams with ${res[0]["worstTop25"]} get 15 bonus points (lowest ranked chosen player in top 25)
-		<br> Using a projected Cut Line of 50th Place
+		<br>Teams with ${res[0]["worstTop25"]} get 15 bonus points (lowest ranked chosen player in top 25)`
+
+		if (currentRound == 1 || currentRound == 2) {
+			table += `<br> Using a projected Cut Line of 50th Place`;
+		}
+		table += `
 		</caption>
 		<thead>
 		<tr>
@@ -87,7 +92,6 @@ async function makeTable(results) {
 	<tbody>
 	`;
 		const teams = res[0]["Teams"]
-		const currentRound = res[0]["CURRENT_ROUND"]
 		teams.forEach(team => {
 			if (team["AllCut"] == true) {
 				table += `
