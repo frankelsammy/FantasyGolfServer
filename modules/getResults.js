@@ -87,6 +87,7 @@ async function makeTable(results) {
 	<tbody>
 	`;
 		const teams = res[0]["Teams"]
+		const currentRound = res[0]["CURRENT_ROUND"]
 		teams.forEach(team => {
 			if (team["AllCut"] == true) {
 				table += `
@@ -109,7 +110,7 @@ async function makeTable(results) {
 			const today = date.getDay()
 			roster.forEach(player => {
 				let finish = player["Finish"] === 1000 ? "N/A" : player["Finish"];
-				if (/*(today == 6 || today == 7) &&*/ player["Cut"] && finish != "N/A") {
+				if ((currentRound == 3 || currentRound == 4) && player["Cut"] && finish != "N/A") {
 					finish = "CUT"
 				}
 				table += `<td>`
