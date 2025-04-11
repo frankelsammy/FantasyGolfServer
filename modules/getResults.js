@@ -54,6 +54,7 @@ async function makeTable(results) {
 
 		results[0] = res[0]["Date"];
 		const currentRound = res[0]["CURRENT_ROUND"]
+		console.log(currentRound)
 
 		let table = "<table border='1'>"
 		table += `
