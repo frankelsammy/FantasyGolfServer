@@ -25,11 +25,29 @@ async function retrieveResults() {
 
 		const database = client.db('FantasyGolf');
 		const collection = database.collection('League');
-		const results = await collection.find({ /* your query criteria */ }).toArray();
+		const results = await collection.find({ title: "leaderboard" }).toArray();
 
 		// Process the retrieved documents
 		const outputFileName = 'output.json';
 		fs.writeFileSync(outputFileName, JSON.stringify(results, null, 2));
+		return results
+
+	} finally {
+		// Ensures that the client will close when you finish/error
+		await client.close();
+	}
+}
+async function retrieveOverall() {
+	try {
+		// Connect the client to the server
+		await client.connect();
+
+		const database = client.db('FantasyGolf');
+		const collection = database.collection('League');
+		const results = await collection.find({ title: "overall" }).toArray();
+
+		// Process the retrieved documents
+		const outputFileName = 'overall.json';
 		return results
 
 	} finally {
@@ -149,28 +167,24 @@ async function makeTable(results) {
 
 }
 
-function getOverallLeaderboard(callback) {
-	const csv = require('csv-parser')
-
-	const results = [];
-
-	fs.createReadStream('static/OverallLeaderboard.csv')
-		.pipe(csv())
-		.on('data', (data) => {
-			results.push(data);
-		})
-		.on('end', () => {
-			let table = `<table id="overall" border='1'>`
-			table += "<tr><th>Place</th><th>Name</th><th>Masters Score</th><th>PGA Champ Score</th><th>US Open Score</th><th>Open Champ Score</th><th>Total Score</th>"
-			let place = 0
-			results.forEach((row, index) => {
-				place += 1
-				table += `<tr><td>${place}</td><td>${row["Name"]}</td><td>${row["Masters"]}</td><td>${row["PGA Champs"]}</td><td>${row["US Open"]}</td><td>${row["British Open"]}</td><td>${row["Total"]}</td></tr>`
-			});
-			table += "</table>"
-			callback(null, table)
-		});
+async function makeOverallLeaderboard(overall) {
+	teams = overall[0]["Teams"]
+	let table = `<table id="overall" border='1'>`
+	table += "<tr><th>Place</th><th>Name</th><th>Masters Score</th><th>PGA Champ Score</th><th>US Open Score</th><th>Open Champ Score</th><th>Total Score</th>"
+	teams.forEach((team, index) => {
+		table += `<tr>
+		  <td>${team["place"]}</td>
+		  <td>${team["name"]}</td>
+		  <td>${team["masters"]}</td>
+		  <td>${team["pga"]}</td>
+		  <td>${team["US"]}</td>
+		  <td>${team["open"]}</td>
+		  <td>${team["total"]}</td>
+		</tr>`;
+	});
+	table += "</table>"
+	return table
 
 }
-module.exports = { makeTable, getOverallLeaderboard }
+module.exports = { makeTable, makeOverallLeaderboard, retrieveOverall }
 
