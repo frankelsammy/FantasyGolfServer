@@ -72,7 +72,6 @@ async function makeTable(results) {
 
 		results[0] = res[0]["Date"];
 		const currentRound = res[0]["CURRENT_ROUND"]
-		console.log(currentRound)
 
 		let table = "<table border='1'>"
 		table += `
@@ -170,7 +169,7 @@ async function makeTable(results) {
 async function makeOverallLeaderboard(overall) {
 	teams = overall[0]["Teams"]
 	let table = `<table id="overall" border='1'>`
-	table += "<tr><th>Place</th><th>Name</th><th>Masters Score</th><th>PGA Champ Score</th><th>US Open Score</th><th>Open Champ Score</th><th>Total Score</th>"
+	table += "<tr><th>Place</th><th>Name</th><th>Masters Score</th><th>PGA Champ Score</th><th>US Open Score</th><th>Open Champ Score</th><th>Total</th>"
 	teams.forEach((team, index) => {
 		table += `<tr>
 		  <td>${team["place"]}</td>
