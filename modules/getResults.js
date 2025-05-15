@@ -80,7 +80,7 @@ async function makeTable(results) {
 		<br>Teams with ${res[0]["worstTop25"]} get 15 bonus points (lowest ranked chosen player in top 25)`
 
 		if (currentRound == 1 || currentRound == 2) {
-			table += `<br> Using a projected Cut Line of 50th Place`;
+			table += `<br> Using a projected Cut Line of 70th Place`;
 		}
 		table += `
 		</caption>
