@@ -132,6 +132,9 @@ async function makeTable(results) {
 			const today = date.getDay()
 			roster.forEach(player => {
 				let finish = player["Finish"] === 1000 ? "CUT" : player["Finish"];
+				if (player["Finish"] == 1001) {
+					finish = "N/A"
+				}
 				// if ((currentRound == 3 || currentRound == 4) && player["Cut"] && finish != "N/A") {
 				// 	finish = "CUT"
 				// }
